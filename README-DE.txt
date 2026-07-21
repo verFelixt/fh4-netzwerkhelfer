@@ -1,0 +1,51 @@
+Exit code: 0
+Wall time: 0.2 seconds
+Output:
+FORZA HORIZON 4 - NETZWERKHELFER
+=================================
+
+Zweck
+-----
+Dieses Paket hilft bei FH4-Onlineabbruechen, die trotz funktionierendem Internet
+auftreten. Es prueft Windows-Netzwerk, IPv6, DNS, Teredo, Xbox-Dienste und die
+Windows-Firewall. Alle Aenderungen werden einzeln erklaert und muessen mit J
+bestaetigt werden.
+
+Start
+-----
+1. ZIP entpacken.
+2. Start-Forza-Netzwerkhelfer.bat doppelklicken.
+3. Die Windows-Sicherheitsabfrage mit Ja bestaetigen.
+4. In der Uebersicht gilt: [OK] = passt, [X] = fehlt, [!] = Hinweis.
+5. Nur die gewuenschte Aktion auswaehlen und mit J bestaetigen.
+6. Anschliessend Aktion 5 waehlen, um den Monitor zu starten.
+
+Empfohlene Konfiguration
+------------------------
+- IPv6 am aktiven Gaming-Adapter aktiviert
+- Cloudflare DNS: 1.1.1.1 / 1.0.0.1 und 2606:4700:4700::1111 / ::1001
+- Teredo: enterpriseclient, Server win10.ipv6.microsoft.com,
+  Clientport automatisch (unspecified)
+- IP-Hilfsdienst aktiv und gestartet
+- Keine aktiven VPN- oder Virtualisierungsfilter am Gaming-Adapter
+
+Was der Helfer NICHT automatisch aendert
+-----------------------------------------
+- FRITZ!Box-Einstellungen. Dort bitte pruefen:
+  Internet > Filter > Listen > Teredo-Filter AUS.
+  Heimnetz > Netzwerk > Gaming-PC > Selbststaendige Portfreigaben erlauben EIN.
+- Er deinstalliert keine Programme und setzt keine Firewall komplett zurueck.
+
+Monitor
+-------
+Der Monitor schreibt CSV-Dateien nach Desktop\Forza-Monitor.
+Bei einem FH4-Abbruch im Monitorfenster M druecken. Mit Strg+C wird beendet.
+Die CSV kann zur Auswertung weitergegeben werden.
+
+Hinweis
+-------
+Dieses Werkzeug nutzt Windows-Bordmittel und ist fuer Windows 10/11 gedacht.
+Eine stabile Internetverbindung oder FH4-Serververfuegbarkeit kann es nicht
+garantieren. Bei anhaltenden Fehlern die erzeugte CSV zusammen mit der
+Support-ID an den Forza-Support geben.
+
