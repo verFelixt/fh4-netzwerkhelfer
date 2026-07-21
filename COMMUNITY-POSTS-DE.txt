@@ -1,50 +1,46 @@
-Exit code: 0
-Wall time: 0.2 seconds
-Output:
-FORZA-FORUM / STEAM â€“ FERTIGER BEITRAG
+FORZA-FORUM / STEAM – FERTIGER BEITRAG
 =======================================
 
 Titel
 -----
-FH4 Online-AbbrÃ¼che unter Windows: transparenter Teredo-/Netzwerkhelfer + Monitor
+FH4 Online-Abbrüche unter Windows: transparenter Teredo-/Netzwerkhelfer + Monitor
 
 Text
 ----
-Ich hatte in Forza Horizon 4 wiederkehrende Online-AbbrÃ¼che beziehungsweise
-â€žBeitritt zur Sitzung nicht mÃ¶glichâ€œ, obwohl Ping und allgemeines Internet stabil
-waren. DafÃ¼r habe ich einen kleinen, transparenten Windows-Helfer erstellt.
+Ich hatte in Forza Horizon 4 wiederkehrende Online-Abbrüche beziehungsweise
+„Beitritt zur Sitzung nicht möglich“, obwohl Ping und allgemeines Internet stabil
+waren. Dafür habe ich einen kleinen, transparenten Windows-Helfer erstellt.
 
-Der Helfer prÃ¼ft IPv6, DNS, Teredo, Xbox-Dienste, Firewall-Regeln und aktive
+Der Helfer prüft IPv6, DNS, Teredo, Xbox-Dienste, Firewall-Regeln und aktive
 VPN-/Virtualisierungsfilter. Er zeigt den Zustand farbig an und fragt vor jeder
-Ã„nderung einzeln nach. ZusÃ¤tzlich kann er einen Monitor starten, der bei einem
+Änderung einzeln nach. Zusätzlich kann er einen Monitor starten, der bei einem
 Abbruch lokale Netzwerkdaten in CSV-Dateien protokolliert.
 
 Download / Quellcode:
-[HIER DEN GITHUB-RELEASE-LINK EINFÃœGEN]
+https://github.com/verFelixt/fh4-netzwerkhelfer/releases/tag/v1.0.0
 
 Wichtig:
 - Das ist kein offizielles Forza-/Microsoft-Tool.
 - Es gibt keine Garantie, weil FH4-Probleme auch serverseitig oder kontobezogen
-  sein kÃ¶nnen.
+  sein können.
 - Der gesamte PowerShell-Quellcode liegt offen bei; keine undurchsichtige EXE.
-- Bitte ZIP erst entpacken und dann Start-Forza-Netzwerkhelfer.bat ausfÃ¼hren.
+- Bitte ZIP erst entpacken und dann Start-Forza-Netzwerkhelfer.bat ausführen.
 
-Bei mir war die entscheidende Einstellung Teredo im Modus â€ženterpriseclientâ€œ
-mit dem Server â€žwin10.ipv6.microsoft.comâ€œ und automatischem Clientport. Das
-muss nicht bei jedem die Ursache sein â€“ der Helfer soll deshalb zuerst prÃ¼fen,
-statt blind Einstellungen zu verÃ¤ndern.
+Bei mir war die entscheidende Einstellung Teredo im Modus „enterpriseclient“
+mit dem Server „win10.ipv6.microsoft.com“ und automatischem Clientport. Das
+muss nicht bei jedem die Ursache sein – der Helfer soll deshalb zuerst prüfen,
+statt blind Einstellungen zu verändern.
 
-Falls ihr testet, freue ich mich Ã¼ber RÃ¼ckmeldung mit Windows-Version,
-Steam-/Store-Version, Screenshot der Ãœbersicht und â€“ bei einem Abbruch â€“ der
+Falls ihr testet, freue ich mich über Rückmeldung mit Windows-Version,
+Steam-/Store-Version, Screenshot der Übersicht und – bei einem Abbruch – der
 letzten Monitor-Datei.
 
 
-KURZTEXT FÃœR REDDIT / DISCORD
+KURZTEXT FÜR REDDIT / DISCORD
 =============================
 
-Ich habe einen offenen Windows-Helfer fÃ¼r FH4-OnlineabbrÃ¼che gebaut: Er prÃ¼ft
-IPv6, DNS, Teredo, Xbox-Dienste und stÃ¶rende VPN-/virtuelle Adapter, fragt vor
-jeder Ã„nderung nach und kann einen Diagnosemonitor starten. Kein offizielles
+Ich habe einen offenen Windows-Helfer für FH4-Onlineabbrüche gebaut: Er prüft
+IPv6, DNS, Teredo, Xbox-Dienste und störende VPN-/virtuelle Adapter, fragt vor
+jeder Änderung nach und kann einen Diagnosemonitor starten. Kein offizielles
 Forza-Tool, aber komplett als PowerShell/Batch einsehbar. Download/Quellcode:
-[GITHUB-LINK]
-
+https://github.com/verFelixt/fh4-netzwerkhelfer/releases/tag/v1.0.0
