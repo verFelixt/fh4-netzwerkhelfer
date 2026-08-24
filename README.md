@@ -6,7 +6,11 @@ Es richtet sich an Spieler, bei denen FH4 keiner Horizon-Sitzung beitreten kann 
 
 > Kein offizielles Werkzeug von Playground Games, Forza oder Microsoft. Nutzung auf eigene Verantwortung.
 
-## Neu in Version 1.1.1
+## Neu in Version 1.1.2
+
+- der Windows-Starter verwendet `-NoExit`, damit das PowerShell-Fenster bei einem unerwarteten Skriptende offen bleibt und die Fehlermeldung sichtbar ist
+
+## Seit Version 1.1.1
 
 - Diagnose, Bericht und Monitor starten jetzt ohne erzwungene Administrator-Neustartschleife
 - Reparaturaktionen erklären bei fehlenden Rechten klar, wie der Helfer als Administrator neu gestartet wird

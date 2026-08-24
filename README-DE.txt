@@ -1,4 +1,4 @@
-FORZA HORIZON 4 - NETZWERKHELFER 1.1.1
+FORZA HORIZON 4 - NETZWERKHELFER 1.1.2
 =======================================
 
 Zweck
@@ -21,6 +21,9 @@ Start
 Der Helfer startet zunaechst auch ohne Administratorrechte. Diagnosebericht und
 Monitor funktionieren im Nur-Diagnose-Modus. Fuer Reparaturaktionen A waehlen
 oder die Batch-Datei per Rechtsklick als Administrator starten.
+
+Seit Version 1.1.2 bleibt das PowerShell-Fenster bei einem unerwarteten Ende
+offen, damit die Fehlermeldung gelesen werden kann.
 
 Empfohlene Konfiguration
 ------------------------
