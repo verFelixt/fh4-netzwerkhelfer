@@ -1,8 +1,5 @@
-Exit code: 0
-Wall time: 0.2 seconds
-Output:
-FORZA HORIZON 4 - NETZWERKHELFER
-=================================
+FORZA HORIZON 4 - NETZWERKHELFER 1.1.0
+=======================================
 
 Zweck
 -----
@@ -18,12 +15,14 @@ Start
 3. Die Windows-Sicherheitsabfrage mit Ja bestaetigen.
 4. In der Uebersicht gilt: [OK] = passt, [X] = fehlt, [!] = Hinweis.
 5. Nur die gewuenschte Aktion auswaehlen und mit J bestaetigen.
-6. Anschliessend Aktion 5 waehlen, um den Monitor zu starten.
+6. Optional Aktion 5 waehlen, um einen Diagnosebericht zu speichern.
+7. Anschliessend Aktion 6 waehlen, um den Monitor zu starten.
 
 Empfohlene Konfiguration
 ------------------------
 - IPv6 am aktiven Gaming-Adapter aktiviert
-- Cloudflare DNS: 1.1.1.1 / 1.0.0.1 und 2606:4700:4700::1111 / ::1001
+- Optional Cloudflare DNS: 1.1.1.1 / 1.0.0.1 und
+  2606:4700:4700::1111 / ::1001
 - Teredo: enterpriseclient, Server win10.ipv6.microsoft.com,
   Clientport automatisch (unspecified)
 - IP-Hilfsdienst aktiv und gestartet
@@ -34,18 +33,20 @@ Was der Helfer NICHT automatisch aendert
 - FRITZ!Box-Einstellungen. Dort bitte pruefen:
   Internet > Filter > Listen > Teredo-Filter AUS.
   Heimnetz > Netzwerk > Gaming-PC > Selbststaendige Portfreigaben erlauben EIN.
-- Er deinstalliert keine Programme und setzt keine Firewall komplett zurueck.
+- Er deinstalliert keine Programme und setzt die Firewall nicht komplett zurueck.
 
-Monitor
--------
-Der Monitor schreibt CSV-Dateien nach Desktop\Forza-Monitor.
+Diagnosebericht und Monitor
+---------------------------
+Diagnoseberichte und Monitor-CSV-Dateien landen im Ordner Forza-Monitor auf dem
+Windows-Desktop. Der Desktop-Pfad wird automatisch ueber Windows ermittelt.
 Bei einem FH4-Abbruch im Monitorfenster M druecken. Mit Strg+C wird beendet.
-Die CSV kann zur Auswertung weitergegeben werden.
+Der Bericht ermittelt absichtlich keine oeffentliche IP-Adresse und nichts wird
+automatisch hochgeladen.
 
 Hinweis
 -------
 Dieses Werkzeug nutzt Windows-Bordmittel und ist fuer Windows 10/11 gedacht.
 Eine stabile Internetverbindung oder FH4-Serververfuegbarkeit kann es nicht
-garantieren. Bei anhaltenden Fehlern die erzeugte CSV zusammen mit der
-Support-ID an den Forza-Support geben.
+garantieren. Bei anhaltenden Fehlern den Diagnosebericht und die erzeugte CSV
+zusammen mit der Support-ID an den Forza-Support geben.
 
