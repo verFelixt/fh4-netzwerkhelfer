@@ -1,4 +1,4 @@
-# Forza Horizon 4 - Verbindungsmonitor
+﻿# Forza Horizon 4 - Verbindungsmonitor
 # Strg+C beendet die Aufzeichnung. Mit M markierst du einen Abbruch.
 
 param(
