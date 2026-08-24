@@ -1,21 +1,36 @@
-# Forza Horizon 4 Netzwerkhelfer 1.1.0
+# Forza Horizon 4 Netzwerkhelfer 1.1.1
 # Interaktiver, lokaler Prüfer. Alle Änderungen erfordern eine Bestätigung.
 
 $ErrorActionPreference = 'Stop'
-$ToolVersion = '1.1.0'
+$ToolVersion = '1.1.1'
 $TargetTeredoServer = 'win10.ipv6.microsoft.com'
 $DnsV4 = @('1.1.1.1', '1.0.0.1')
 $DnsV6 = @('2606:4700:4700::1111', '2606:4700:4700::1001')
 $PackageRoot = Split-Path -Parent $PSCommandPath
 
-function Ensure-Admin {
+function Test-IsAdmin {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object Security.Principal.WindowsPrincipal($identity)
-    if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host 'Administratorrechte werden für optionale Reparaturen benötigt.' -ForegroundColor Yellow
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+function Require-Admin {
+    if ($script:IsAdmin) { return $true }
+    Write-Host 'Diese Reparatur benötigt Administratorrechte.' -ForegroundColor Yellow
+    Write-Host 'Wähle A für einen Neustart als Administrator oder starte die Batch-Datei per Rechtsklick als Administrator.' -ForegroundColor Yellow
+    Read-Host 'Weiter mit Eingabetaste' | Out-Null
+    return $false
+}
+
+function Restart-AsAdmin {
+    try {
         $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`""
-        Start-Process powershell.exe -Verb RunAs -ArgumentList $arguments
+        Start-Process powershell.exe -Verb RunAs -ArgumentList $arguments -ErrorAction Stop
         exit
+    } catch {
+        Write-Host "Administrator-Neustart fehlgeschlagen: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host 'Bitte die Batch-Datei per Rechtsklick und Als Administrator ausführen starten.' -ForegroundColor Yellow
+        Read-Host 'Weiter mit Eingabetaste' | Out-Null
     }
 }
 
@@ -84,6 +99,9 @@ function Show-Checks {
     Clear-Host
     Write-Host "FORZA HORIZON 4 - NETZWERKHELFER v$ToolVersion" -ForegroundColor Cyan
     Write-Host 'Die Prüfung ist lokal. Änderungen erfolgen nur nach deiner Bestätigung.'
+    if (-not $script:IsAdmin) {
+        Write-Host 'Nur-Diagnose-Modus: Reparaturaktionen benötigen einen Neustart als Administrator.' -ForegroundColor Yellow
+    }
     Write-Host ''
     foreach ($check in Get-Checks) {
         $color = switch ($check.Status) { 'OK' {'Green'} 'FEHLT' {'Red'} default {'Yellow'} }
@@ -98,6 +116,7 @@ function Confirm([string]$Question) {
 }
 
 function Enable-IPv6 {
+    if (-not (Require-Admin)) { return }
     $adapter = Get-ActiveAdapter
     if (Confirm "IPv6 auf '$($adapter.Name)' aktivieren?") {
         Enable-NetAdapterBinding -Name $adapter.Name -ComponentID ms_tcpip6
@@ -106,6 +125,7 @@ function Enable-IPv6 {
 }
 
 function Set-CloudflareDns {
+    if (-not (Require-Admin)) { return }
     $adapter = Get-ActiveAdapter
     if (Confirm "DNS auf Cloudflare am Adapter '$($adapter.Name)' setzen?") {
         Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses $DnsV4
@@ -117,6 +137,7 @@ function Set-CloudflareDns {
 }
 
 function Set-RecommendedTeredo {
+    if (-not (Require-Admin)) { return }
     if (Confirm "Teredo auf enterpriseclient mit '$TargetTeredoServer' und automatischem Port setzen?") {
         netsh interface teredo set state type=enterpriseclient servername=$TargetTeredoServer clientport=default | Out-Null
         Write-Host 'Teredo-Konfiguration gesetzt.' -ForegroundColor Green
@@ -124,6 +145,7 @@ function Set-RecommendedTeredo {
 }
 
 function Start-RequiredServices {
+    if (-not (Require-Admin)) { return }
     if (Confirm 'IP-Hilfsdienst, Gaming Services und Xbox Netzwerkdienst starten?') {
         Set-Service iphlpsvc -StartupType Automatic
         Start-Service iphlpsvc -ErrorAction SilentlyContinue
@@ -163,7 +185,7 @@ function Start-Monitor {
     Start-Process powershell.exe -ArgumentList "-NoProfile -NoExit -ExecutionPolicy Bypass -File `"$monitor`""
 }
 
-Ensure-Admin
+$script:IsAdmin = Test-IsAdmin
 while ($true) {
     try {
         Show-Checks
@@ -179,6 +201,7 @@ while ($true) {
     Write-Host '  4  Xbox-/Netzwerkdienste starten'
     Write-Host '  5  Diagnosebericht speichern'
     Write-Host '  6  Forza Monitor starten'
+    if (-not $script:IsAdmin) { Write-Host '  A  Als Administrator neu starten' }
     Write-Host '  R  Prüfung aktualisieren'
     Write-Host '  Q  Beenden'
     $choice = Read-Host 'Auswahl'
@@ -190,6 +213,7 @@ while ($true) {
             '4' { Start-RequiredServices; Start-Sleep 1 }
             '5' { Export-DiagnosticReport; Read-Host 'Weiter mit Eingabetaste' | Out-Null }
             '6' { Start-Monitor }
+            'A' { Restart-AsAdmin }
             'Q' { exit }
         }
     } catch {
