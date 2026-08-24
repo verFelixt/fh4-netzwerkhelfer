@@ -1,8 +1,8 @@
-# Forza Horizon 4 Netzwerkhelfer 1.1.1
+# Forza Horizon 4 Netzwerkhelfer 1.1.2
 # Interaktiver, lokaler Prüfer. Alle Änderungen erfordern eine Bestätigung.
 
 $ErrorActionPreference = 'Stop'
-$ToolVersion = '1.1.1'
+$ToolVersion = '1.1.2'
 $TargetTeredoServer = 'win10.ipv6.microsoft.com'
 $DnsV4 = @('1.1.1.1', '1.0.0.1')
 $DnsV6 = @('2606:4700:4700::1111', '2606:4700:4700::1001')
