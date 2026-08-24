@@ -1,4 +1,4 @@
-FORZA HORIZON 4 - NETZWERKHELFER 1.1.0
+FORZA HORIZON 4 - NETZWERKHELFER 1.1.1
 =======================================
 
 Zweck
@@ -17,6 +17,10 @@ Start
 5. Nur die gewuenschte Aktion auswaehlen und mit J bestaetigen.
 6. Optional Aktion 5 waehlen, um einen Diagnosebericht zu speichern.
 7. Anschliessend Aktion 6 waehlen, um den Monitor zu starten.
+
+Der Helfer startet zunaechst auch ohne Administratorrechte. Diagnosebericht und
+Monitor funktionieren im Nur-Diagnose-Modus. Fuer Reparaturaktionen A waehlen
+oder die Batch-Datei per Rechtsklick als Administrator starten.
 
 Empfohlene Konfiguration
 ------------------------
