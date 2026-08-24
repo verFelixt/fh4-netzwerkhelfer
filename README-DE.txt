@@ -1,4 +1,4 @@
-FORZA HORIZON 4 - NETZWERKHELFER 1.1.2
+FORZA HORIZON 4 - NETZWERKHELFER 1.1.3
 =======================================
 
 Zweck
@@ -24,6 +24,9 @@ oder die Batch-Datei per Rechtsklick als Administrator starten.
 
 Seit Version 1.1.2 bleibt das PowerShell-Fenster bei einem unerwarteten Ende
 offen, damit die Fehlermeldung gelesen werden kann.
+
+Seit Version 1.1.3 sind die PowerShell-Dateien fuer Windows PowerShell 5.1
+UTF-8-kompatibel gespeichert; Umlaute und Eszett werden korrekt angezeigt.
 
 Empfohlene Konfiguration
 ------------------------
