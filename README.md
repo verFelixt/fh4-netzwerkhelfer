@@ -6,7 +6,11 @@ Es richtet sich an Spieler, bei denen FH4 keiner Horizon-Sitzung beitreten kann 
 
 > Kein offizielles Werkzeug von Playground Games, Forza oder Microsoft. Nutzung auf eigene Verantwortung.
 
-## Neu in Version 1.1.2
+## Neu in Version 1.1.3
+
+- beide PowerShell-Dateien werden mit UTF-8-BOM ausgeliefert, damit Windows PowerShell 5.1 deutsche Umlaute und `ß` korrekt darstellt
+
+## Seit Version 1.1.2
 
 - der Windows-Starter verwendet `-NoExit`, damit das PowerShell-Fenster bei einem unerwarteten Skriptende offen bleibt und die Fehlermeldung sichtbar ist
 
