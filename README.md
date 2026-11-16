@@ -1,99 +1,100 @@
-# Forza Horizon 4 – Netzwerkhelfer für Windows
+# Forza Horizon 4 – Network Helper for Windows
 
-Ein transparentes Diagnose- und Hilfswerkzeug für **Forza Horizon 4 Online-Abbrüche** unter Windows 10/11.
+**English** | [Deutsch](README.de.md)
 
-Es richtet sich an Spieler, bei denen FH4 keiner Horizon-Sitzung beitreten kann oder die Verbindung verliert, obwohl die allgemeine Internetverbindung stabil aussieht.
+A transparent diagnostic and helper tool for **Forza Horizon 4 online disconnects** on Windows 10/11.
 
-> Kein offizielles Werkzeug von Playground Games, Forza oder Microsoft. Nutzung auf eigene Verantwortung.
+It is meant for players whose FH4 can't join a Horizon session or keeps losing the connection even though their regular internet connection looks stable.
 
-## Neu in Version 1.1.3
+> Not an official tool from Playground Games, Forza or Microsoft. Use at your own risk.
 
-- beide PowerShell-Dateien werden mit UTF-8-BOM ausgeliefert, damit Windows PowerShell 5.1 deutsche Umlaute und `ß` korrekt darstellt
+## Quick start
 
-## Seit Version 1.1.2
+1. Download the ZIP from the [Releases page](https://github.com/verFelixt/fh4-netzwerkhelfer/releases) and extract it completely.
+2. Right-click `Start-Forza-Netzwerkhelfer.bat` → **Run as administrator** (without admin rights only diagnosis works).
+3. Check the overview. Red `[X]` entries are what you most likely need to fix.
+4. Type the number of an action (e.g. `3` = set recommended Teredo configuration), press Enter, then confirm with `Y`.
+5. Press `R` to refresh the checks.
 
-- der Windows-Starter verwendet `-NoExit`, damit das PowerShell-Fenster bei einem unerwarteten Skriptende offen bleibt und die Fehlermeldung sichtbar ist
+The tool picks its language from your Windows display language (German or English). Press `L` in the menu to switch at any time.
 
-## Seit Version 1.1.1
+## New in version 1.2.0
 
-- Diagnose, Bericht und Monitor starten jetzt ohne erzwungene Administrator-Neustartschleife
-- Reparaturaktionen erklären bei fehlenden Rechten klar, wie der Helfer als Administrator neu gestartet wird
-- Fehler beim automatischen Administrator-Neustart schließen das Programm nicht mehr
+- **English language support** for the helper, the monitor and the diagnostic report (automatic, switchable with `L`)
+- Fixed a false red `[X]` for the Teredo type when Teredo is configured via **Group Policy** (`enterpriseclient (Group Policy)` is now recognized as correct)
+- Clearer messages: deviations now show the current value and which action fixes it
+- English README (`README.md`, `README-EN.txt`)
 
-## Seit Version 1.1.0
+Older changes: see [CHANGELOG in the German README](README.de.md#neu-in-version-120).
 
-- zuverlässigere Auswertung deutscher und englischer Teredo-Ausgaben
-- zusätzlicher Teredo-Status in der Übersicht
-- robusterer Monitor mit korrekt escaped CSV-Feldern
-- Desktop-Pfad wird über Windows ermittelt und funktioniert dadurch auch bei umgeleiteten Ordnern
-- separater Diagnosebericht ohne absichtlich ermittelte öffentliche IP-Adresse
-- verständliche Fehlermeldungen, wenn einzelne Dienste oder Dateien fehlen
+## What the tool checks
 
-## Was das Tool prüft
+Green `[OK]` = setting is fine. Red `[X]` = setting is missing or differs from the recommended configuration. Yellow `[!]` = note.
 
-Beim Start erscheint eine übersichtliche Prüfung. Grün bedeutet: Einstellung passt. Rot bedeutet: Einstellung fehlt oder weicht von der empfohlenen Konfiguration ab. Gelb ist ein Hinweis.
+- active network adapter and IPv6
+- DNS servers (optionally recommended: Cloudflare)
+- Teredo type, state, server and automatic Teredo client port
+- IP Helper service, Gaming Services and Xbox Live Networking Service
+- Windows Firewall rules for Teredo
+- active VPN or virtualization filters on the gaming adapter
 
-- aktiver Netzwerkadapter und IPv6
-- DNS-Server (optional empfohlen: Cloudflare)
-- Teredo-Modus, Status, Server und automatischer Teredo-Port
-- IP-Hilfsdienst, Gaming Services und Xbox-Netzwerkdienst
-- Windows-Firewallregeln für Teredo
-- aktive VPN- oder Virtualisierungsfilter am Gaming-Adapter
+## What can be changed after confirmation
 
-## Was nach Bestätigung geändert werden kann
+Every change has to be confirmed individually. The tool can:
 
-Jede Änderung muss einzeln bestätigt werden. Das Tool kann:
+1. enable IPv6 on the active adapter
+2. set Cloudflare DNS: `1.1.1.1`, `1.0.0.1`, `2606:4700:4700::1111`, `2606:4700:4700::1001`
+3. set Teredo to `enterpriseclient` with `win10.ipv6.microsoft.com` and an automatic client port
+4. start the required Xbox/network services
 
-1. IPv6 am aktiven Adapter aktivieren
-2. Cloudflare DNS eintragen: `1.1.1.1`, `1.0.0.1`, `2606:4700:4700::1111`, `2606:4700:4700::1001`
-3. Teredo auf `enterpriseclient` mit `win10.ipv6.microsoft.com` und automatischem Clientport setzen
-4. benötigte Xbox-/Netzwerkdienste starten
+The tool does not uninstall programs, does not open ports manually and does not fully reset the firewall.
 
-Das Tool deinstalliert keine Programme, öffnet keine Ports manuell und setzt die Firewall nicht vollständig zurück.
+## Teredo and Group Policy
 
-## Start
+Many FH4 guides set Teredo via `gpedit.msc`. In that case `netsh` shows values like `enterpriseclient (Group Policy)`. This is fine as long as the type is `enterpriseclient`.
 
-1. Die ZIP-Datei herunterladen und vollständig entpacken.
-2. `Start-Forza-Netzwerkhelfer.bat` doppelklicken.
-3. Die Windows-Sicherheitsabfrage bestätigen.
-4. Die angezeigten Punkte prüfen und bei Bedarf eine Aktion auswählen.
-5. Mit Aktion `5` bei Bedarf einen Diagnosebericht speichern.
-6. Für einen Verbindungstest Aktion `6 – Forza Monitor starten` wählen.
+If the Group Policy forces a *different* value, action 3 cannot override it. Change it in `gpedit.msc` under
+**Computer Configuration → Administrative Templates → Network → TCPIP Settings → IPv6 Transition Technologies**
+(`Set Teredo State` = *Enterprise Client*, `Set Teredo Server Name` = `win10.ipv6.microsoft.com`), or set those policies to *Not Configured*.
 
-Diagnoseberichte und Monitorprotokolle werden im Ordner `Forza-Monitor` auf dem Windows-Desktop gespeichert. Bei einem Abbruch im Monitorfenster `M` drücken; mit `Strg+C` beenden.
+## Diagnostic report and monitor
 
-## Zusätzlich am Router prüfen
+- Action `5` saves a diagnostic report.
+- Action `6` starts the connection monitor. Press `M` in the monitor window when FH4 disconnects; stop it with `Ctrl+C`.
 
-Das Tool kann keine Router-Einstellungen verändern. Bei einer FRITZ!Box sind für den Gaming-PC üblicherweise diese Einstellungen sinnvoll:
+Reports and monitor logs are saved in the `Forza-Monitor` folder on your Windows desktop.
 
-- **Internet → Filter → Listen:** Teredo-Filter deaktiviert
-- **Heimnetz → Netzwerk → Gaming-PC:** „Selbstständige Portfreigaben für dieses Gerät erlauben“ aktiviert
+## Also check your router
 
-Keinen Exposed Host nur für diesen Zweck einrichten. Manuelle Portfreigaben sind für die Diagnose normalerweise ebenfalls nicht nötig.
+The tool cannot change router settings. On a FRITZ!Box these settings usually make sense for the gaming PC:
 
-## Wichtige Hinweise
+- **Internet → Filters → Lists:** Teredo filter disabled
+- **Home Network → Network → gaming PC:** "Permit independent port sharing for this device" enabled
 
-- Teredo kann im Leerlauf `dormant` anzeigen. Entscheidend ist der Status, während FH4 online ist; dort sollte es idealerweise `qualified` sein.
-- `restricted (port)` bei NAT oder `UPnP: Nein` in der Teredo-Ausgabe ist nicht automatisch ein Fehler.
-- Cloudflare DNS ist eine optionale Diagnosemaßnahme. Wenn dein vorhandener DNS zuverlässig funktioniert, musst du ihn nicht ändern.
-- Das Tool kann Probleme auf den FH4-Servern, beim Microsoft-Konto oder durch andere Software nicht garantiert beheben.
-- Vor dem Test VPN-Software, virtuelle Netzwerkadapter und Torrent-Programme schließen bzw. deaktivieren.
+On other routers: make sure UPnP is enabled and no Teredo/IPv6 tunnel filter is active. Don't set up an exposed host just for this.
 
-## Datenschutz
+## Important notes
 
-Die Prüfung läuft ausschließlich lokal. Der Helfer schreibt Text-/CSV-Dateien nur auf den eigenen Desktop und lädt nichts hoch. Der Diagnosebericht ermittelt absichtlich keine öffentliche IP-Adresse. Andere technische Angaben können trotzdem Rückschlüsse auf das eigene System erlauben; vor dem Teilen bitte kontrollieren und bei Bedarf schwärzen.
+- Teredo may show `dormant` while idle. What matters is the state while FH4 is online; ideally it should be `qualified`.
+- `restricted (port)` behind NAT or `UPnP: No` in the Teredo output is not automatically an error.
+- Cloudflare DNS is an optional diagnostic step. If your current DNS works reliably, you don't need to change it.
+- The tool cannot fix problems on the FH4 servers, with your Microsoft account or caused by other software.
+- Close or disable VPN software, virtual network adapters and torrent programs before testing.
 
-## Rückmeldungen und Fehlerberichte
+## Privacy
 
-Bitte bei einer Rückmeldung angeben:
+All checks run locally. The helper only writes text/CSV files to your own desktop and uploads nothing. The diagnostic report intentionally does not determine your public IP address. Other technical details may still reveal information about your system; please review (and redact if needed) before sharing.
 
-- Windows-Version
-- Steam- oder Microsoft-Store-Version von FH4
-- Screenshot der Helfer-Übersicht oder Diagnosebericht
-- die letzte Monitor-CSV
-- Zeitpunkt und genauer Wortlaut der FH4-Fehlermeldung
+## Feedback and bug reports
 
-## Lizenz
+Please include:
 
-Dieses Projekt steht unter der MIT-Lizenz. Details in [LICENSE](LICENSE).
+- Windows version
+- Steam or Microsoft Store version of FH4
+- screenshot of the helper overview or the diagnostic report
+- the latest monitor CSV
+- time and exact wording of the FH4 error message
 
+## License
+
+MIT License. See [LICENSE](LICENSE).
