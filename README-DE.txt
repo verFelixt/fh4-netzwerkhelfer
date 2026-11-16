@@ -1,4 +1,4 @@
-FORZA HORIZON 4 - NETZWERKHELFER 1.1.3
+FORZA HORIZON 4 - NETZWERKHELFER 1.2.0
 =======================================
 
 Zweck
@@ -8,10 +8,13 @@ auftreten. Es prueft Windows-Netzwerk, IPv6, DNS, Teredo, Xbox-Dienste und die
 Windows-Firewall. Alle Aenderungen werden einzeln erklaert und muessen mit J
 bestaetigt werden.
 
+Die Sprache richtet sich nach der Windows-Anzeigesprache (Deutsch oder
+Englisch). Mit L im Menue laesst sie sich umschalten.
+
 Start
 -----
 1. ZIP entpacken.
-2. Start-Forza-Netzwerkhelfer.bat doppelklicken.
+2. Start-Forza-Netzwerkhelfer.bat per Rechtsklick als Administrator ausfuehren.
 3. Die Windows-Sicherheitsabfrage mit Ja bestaetigen.
 4. In der Uebersicht gilt: [OK] = passt, [X] = fehlt, [!] = Hinweis.
 5. Nur die gewuenschte Aktion auswaehlen und mit J bestaetigen.
@@ -27,6 +30,10 @@ offen, damit die Fehlermeldung gelesen werden kann.
 
 Seit Version 1.1.3 sind die PowerShell-Dateien fuer Windows PowerShell 5.1
 UTF-8-kompatibel gespeichert; Umlaute und Eszett werden korrekt angezeigt.
+
+Seit Version 1.2.0 gibt es eine englische Version. Ausserdem wird Teredo, das
+per Gruppenrichtlinie gesetzt wurde (Anzeige "enterpriseclient (Group Policy)"),
+nicht mehr faelschlich rot markiert.
 
 Empfohlene Konfiguration
 ------------------------
